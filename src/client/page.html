@@ -1,0 +1,60 @@
+<!doctype HTML>
+<html>
+<meta name="robots" content="none" />
+
+<head>
+    <title>Musical Calculations</title>
+    <h1>Musical Calculations</h1>
+    <h3>Measures to Time</h3>
+    <div>
+        <span id="m2t-result-text">
+            <span id="res-m2t-measures">???</span> measures at
+            <span id="res-m2t-bpm">???</span>BPM with a
+            <span id="res-m2t-signature-upper">???</span>/<span id="res-m2t-signature-lower">???</span>
+            signature take <span id="res-m2t-time">???</span>.
+        </span>
+        <div>
+            <label for="m2t-measures">Measures</label>
+            <input type="number" name="m2t-measures" value="16">
+        </div>
+        <div>
+            <label for="m2t-bpm">BPM</label>
+            <input type="number" name="m2t-bpm" value="120">
+
+            <div>
+                <label for="m2t-signature-upper">Signature (upper numeral)</label>
+                <input type="number" name="m2t-signature-upper" value="4">
+                <label for="m2t-signature-lower">Signature (lower numeral) </label>
+                <input type="number" name="m2t-signature-lower" value="4">
+            </div>
+        </div>
+        <h3>Step to Time</h3>
+        <span id="s2r-result-text">
+            <span>
+                <span id="res-s2t-step-upper">???</span>/<span id="res-s2t-step-lower">???</span>th note
+            </span>
+            at
+            <span id="res-s2t-bpm">???</span>BPM
+            takes <span id="res-s2t-time">???</span>ms.
+        </span>
+        
+        <div>
+            <div>
+                <label for="s2t-bpm">BPM</label>
+                <input type="number" name="s2t-bpm" value="120">
+            </div>
+            <div>
+                <label for="s2t-step-upper">Step (upper numeral)</label>
+                <input type="number" name="s2t-step-upper" value="1">
+                <label for="s2t-step-lower">Step (lower numeral) </label>
+                <input type="number" name="s2t-step-lower" value="16">
+            </div>
+        </div>
+    </div>
+</head>
+
+<body>
+    <script src="/page.js"></script>
+</body>
+
+</html>
