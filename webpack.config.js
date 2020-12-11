@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 
@@ -34,10 +35,16 @@ const sharedConfig = {
   plugins: [
     new webpack.ProgressPlugin(),
     new CopyPlugin({
-      patterns: [{
-        from: 'src/client/page.html',
-        to: 'page.html',
-      }]
+      patterns: [
+        {
+          from: 'src/client/page.html',
+          to: 'page.html',
+        },
+        {
+          from: 'src/client/style.css',
+          to: 'style.css',
+        }
+      ]
     })
   ],
 
@@ -47,7 +54,8 @@ const sharedConfig = {
       loader: 'ts-loader',
       include: [path.resolve(__dirname, 'src')],
       exclude: [/node_modules/]
-    }, {
+    }
+      , {
       test: /.css$/,
 
       use: [{
@@ -61,9 +69,8 @@ const sharedConfig = {
       }]
     }]
   },
-
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.css']
   },
 
 
@@ -73,6 +80,12 @@ const frontendConfig = {
   entry: {
     page: './src/client/page.ts'
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      inlineSource: '.(js|css)$' // embed all javascript and css inline
+    }),
+    // new HtmlWebpackInlineSourcePlugin(),
+  ],
   optimization: {
     minimizer: [new TerserPlugin()],
 
@@ -95,7 +108,7 @@ const frontendConfig = {
 const backendConfig = {
   entry: {
     server: './src/server/server.ts'
-  }, 
+  },
   target: 'node',
 };
 

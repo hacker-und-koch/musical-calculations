@@ -15,6 +15,9 @@
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^5.0.1",
+    "html-webpack-inline-source-plugin": "^0.0.10",
+    "html-webpack-plugin": "^4.5.0",
+    "nodemon": "^2.0.6",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.3",
     "ts-loader": "^8.0.11",
@@ -24,12 +27,14 @@
   },
   "description": "My webpack project",
   "bin": {
-    "musical-calculations-server": "./dist/server.js"
+    "musical-calculations-server": "dist/server.js"
   },
   "scripts": {
     "postinstall": "yarn build",
     "build": "webpack",
     "clean": "rm -r ./dist",
-    "server": "node dist/server.js"
+    "server": "node dist/server.js",
+    "build-and-run": "npm run build && npm run server",
+    "watch": "nodemon -i ./dist -e 'ts,html,css' --exec 'npm run build-and-run'"
   }
 }

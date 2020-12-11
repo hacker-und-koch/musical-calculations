@@ -5,57 +5,74 @@
 
 <head>
     <title>Musical Calculations</title>
-    <h1>Musical Calculations</h1>
-    <h3>Measures to Time</h3>
-    <div>
-        <span id="m2t-result-text">
-            <span id="res-m2t-measures">???</span> measures at
-            <span id="res-m2t-bpm">???</span>BPM with a
-            <span id="res-m2t-signature-upper">???</span>/<span id="res-m2t-signature-lower">???</span>
-            signature take <span id="res-m2t-time">???</span>.
-        </span>
-        <div>
-            <label for="m2t-measures">Measures</label>
-            <input type="number" name="m2t-measures" value="16">
-        </div>
-        <div>
-            <label for="m2t-bpm">BPM</label>
-            <input type="number" name="m2t-bpm" value="120">
-
-            <div>
-                <label for="m2t-signature-upper">Signature (upper numeral)</label>
-                <input type="number" name="m2t-signature-upper" value="4">
-                <label for="m2t-signature-lower">Signature (lower numeral) </label>
-                <input type="number" name="m2t-signature-lower" value="4">
-            </div>
-        </div>
-        <h3>Step to Time</h3>
-        <span id="s2r-result-text">
-            <span>
-                <span id="res-s2t-step-upper">???</span>/<span id="res-s2t-step-lower">???</span>th note
-            </span>
-            at
-            <span id="res-s2t-bpm">???</span>BPM
-            takes <span id="res-s2t-time">???</span>ms.
-        </span>
-        
-        <div>
-            <div>
-                <label for="s2t-bpm">BPM</label>
-                <input type="number" name="s2t-bpm" value="120">
-            </div>
-            <div>
-                <label for="s2t-step-upper">Step (upper numeral)</label>
-                <input type="number" name="s2t-step-upper" value="1">
-                <label for="s2t-step-lower">Step (lower numeral) </label>
-                <input type="number" name="s2t-step-lower" value="16">
-            </div>
-        </div>
-    </div>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+    <div class="container">
+        <div class="column center w100">
+            <h1 class="clickable autoscale" onclick="toggleTheme()">Musical Calculations</h1>
+            <h3>Measures to Time</h3>
+            <div class="row w100">
+                <div class="column w50">
+                    <div class="ellipsis w100">
+                        <input type="number" class="stylo-field w30" name="m2t-measures" value="16">
+                        measures at
+                    </div>
+                    <div class="ellipsis w100">
+                        <input type="number" class="stylo-field w30" name="m2t-bpm" value="120">
+                        BPM with a
+                    </div>
+
+                    <div class="ellipsis w100">
+                        <input type="number" class="stylo-field w30" name="m2t-signature-upper" value="4"> /
+                        4 signature
+                    </div>
+                </div>
+                <div class="w10">
+                    <span class="big">➫</span>
+                </div>
+                <div class="w-40 no-overflow">
+                    <span id="res-m2t-time">???</span>
+                </div>
+            </div>
+
+            <h3>Step to Time</h3>
+            <div class="row w100">
+                <div class="column w50">
+                    <div class="row w100 no-overflow">
+                        <div class="column w30">
+                            <input type="number" class="stylo-field w100" name="s2t-step-upper" value="1">
+                            <div class="w100 no-overflow">
+                                ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+                            </div>
+                            <select class="stylo-field w100" name="s2t-step-lower" id="test-elem">
+                            </select>
+                        </div>
+
+
+                        <div class="w-auto">
+                            <span style="margin-left: 0.5rem">th at</span>
+                        </div>
+                    </div>
+                    <div class="w100 no-overflow">
+
+                        <input type="number" class="stylo-field w30" name="s2t-bpm" value="120">
+                         BPM
+                    </div>
+                </div>
+
+                <div class="w10">
+                    <span class="big">➫</span>
+                </div>
+                <div class="w-40 no-overflow">
+                    <span id="res-s2t-time">???</span> ms
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="page.js"></script>
+    <a class="footer" href="https://github.com/hacker-und-koch/musical-calculations">github</a>
 </body>
 
 </html>

@@ -1,0 +1,142 @@
+body {
+    color: rgb(106, 212, 181);
+    background-color: black;
+    font-family: monospace;
+    font-size: 12pt;
+    padding: 0.3rem;
+}
+
+option {
+    padding: 0;
+}
+
+
+.stylo-field {
+    border: none;
+    /* border-bottom: 1px solid darkgreen; */
+    background: inherit;
+    color: inherit;
+    font: inherit;
+    text-align: right;
+    /* margin-left: 1rem; */
+    text-decoration: underline;
+    /* align-content: center; */
+    padding: 0;
+}
+
+select {
+    direction: rtl; 
+}
+
+.clickable {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.clickable:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    display: flex;    
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    /* padding: 0.5rem; */
+    /* width: 100%; */
+}
+
+.column {
+    display: flex;    
+    flex-direction: column;
+    /* font-size: 0.9rem; */
+}
+
+.center {
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    align-items: right;
+}
+
+.big {
+    font-size: 3rem;
+    /* padding-left: 1rem;
+    padding-right: 1rem; */
+}
+
+.w10 {
+    width: 10%;
+}
+.w15 {
+    width: 15%;
+}
+
+.w20 {
+    width: 20%;
+}
+
+.w25 {
+    width: 25%;
+}
+
+.w30 {
+    width: 30%;
+}
+
+.w40 {
+    width: 40%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.w60 {
+    width: 60%;
+}
+.w70 {
+    width: 70%;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.pr1 {
+    padding-right: 1rem;
+}
+
+.autoscale {
+    font-size: auto;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}
+
+.no-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 4px;
+}
