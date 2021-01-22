@@ -1,6 +1,13 @@
-# musical-calculations
+# Musical Calculations
 
-## Build
+## [Code](./vue-client)
+```bash
+$ cd ./vue-client
+
+$ yarn serve
 ```
-$ yarn build
+
+## Deploy
+```bash
+$ yarn deploy
 ```

@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <MusicalCalculations :title="title"/>
-    <a class="footer" href="https://github.com/hacker-und-koch/musical-calculations">github</a>
+    <a class="footer" target="_blank" href="https://github.com/hacker-und-koch/musical-calculations">github</a>
   </div>
 </template>
 
