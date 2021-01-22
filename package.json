@@ -1,0 +1,16 @@
+{
+  "name": "@hacker-und-koch/musical-calculations",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "repository": "git@github.com:hacker-und-koch/musical-calculations.git",
+  "author": "Sam Di Velopa <punkt.punktdot.dot@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "description": "My webpack project",
+  "bin": {
+    "musical-calculations-server": "dist/server.js"
+  },
+  "scripts": {
+    "deploy": "./upload-dist.sh"
+  }
+}

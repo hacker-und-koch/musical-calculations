@@ -1,20 +1,25 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <HelloWorld msg="Well, Hi!"/>
+    <MusicalCalculations :title="title"/>
+    <a class="footer" href="https://github.com/hacker-und-koch/musical-calculations">github</a>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import MusicalCalculations from './components/MusicalCalculations.vue';
+import NumberInput from './components/NumberInput.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    MusicalCalculations,
+    NumberInput,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  private title = 'Musical Calculations';
+}
 </script>
 
 <style lang="less">
@@ -25,5 +30,10 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.footer {
+    position: absolute;
+    text-align: center;
+    bottom: 4px;
 }
 </style>

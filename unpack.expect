@@ -1,0 +1,31 @@
+#!/usr/bin/expect
+
+set timeout 60
+
+spawn ssh [lindex $argv 0]
+
+expect "$" {
+    send "mv [lindex $argv 2] [lindex $argv 1]\r"
+}
+
+expect "$" {
+    send "cd [lindex $argv 1]\r\n"
+}
+
+expect "$" {
+    send "rm -rf ./dist\r"
+}
+
+expect "$" {
+    send "tar -xf [lindex $argv 2]\r"
+}
+
+expect "$" {
+    send "ls -la .; ls -la dist/\r"
+}
+
+expect "$" {
+    send "logout\r"
+}
+
+interact
