@@ -25,7 +25,11 @@ expect "$" {
 }
 
 expect "$" {
-    send "echo '[exec date] | [lindex $argv 3]' >> deployment_history.txt"
+    send "echo '[exec date] | [lindex $argv 3]' >> deployment_history.txt\r"
+}
+
+expect "$" {
+    send "unlink [lindex $argv 2]\r "
 }
 
 expect "$" {
