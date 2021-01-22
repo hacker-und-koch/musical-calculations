@@ -25,6 +25,10 @@ expect "$" {
 }
 
 expect "$" {
+    send 'echo "$(date) | [lindex $argv 3]" >> deployment_history.txt'
+}
+
+expect "$" {
     send "logout\r"
 }
 
