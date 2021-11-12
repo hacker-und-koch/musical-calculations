@@ -10,7 +10,7 @@
     <app-number-input 
         class="w-100 m-8"
         (changed)="calcResult()" 
-        [label]="'bpm with'" 
+        [label]="'bpm'" 
         [(value)]="values.bpm"
     ></app-number-input>
     
@@ -18,5 +18,3 @@
     
     <h3 class="w-100 m-8">Result: {{ (result | async )?.timeStr }}</h3>
 </div>
-
-<!-- -- {{ values.bars }} -- {{ values.bpm }} -- -->

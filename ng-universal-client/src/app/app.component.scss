@@ -27,19 +27,18 @@ a:hover {
 
 a:hover {
     color: #5ae9ff;
-    font-weight: bold;
+    text-decoration: underline;
 }
 
 footer {
     margin-top: 8px;
+    // position: relative;
     display: flex;
     align-items: center;
-    line-height: 20px;
-}
-
-footer a {
-    display: flex;
-    align-items: center;
+    align-content: center;
+    text-align: center;
+    // line-height: 20px;
+    bottom: 0;
 }
 
 .m-8 {

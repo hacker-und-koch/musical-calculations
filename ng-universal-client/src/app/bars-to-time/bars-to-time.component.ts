@@ -1,6 +1,5 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { InputValue } from '../models';
 import { padTime as pad, measuresToTime } from '../util';
 
 
@@ -16,11 +15,6 @@ export class BarsToTimeComponent implements OnInit {
   ngOnInit(): void {
     this.calcResult();
 
-  }
-
-  private _title!: string;
-  get title() {
-    return this._title;
   }
 
   public values = {
@@ -48,7 +42,5 @@ export class BarsToTimeComponent implements OnInit {
     const date = new Date(time);
     const timeStr = `${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
     this._result.next({ time, timeStr });
-    console.log(date, time, timeStr, this.values);
   }
-
 }

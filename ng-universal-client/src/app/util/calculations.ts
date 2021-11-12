@@ -11,7 +11,6 @@ export interface MeasuresToTimeOpts {
  * 120 BEATS   1 MEASURE   1
  */
 export function measuresToTime(opts: MeasuresToTimeOpts): number {
-  console.log('in util!', opts);
   const minutes = (1 / opts.bpm) * opts.beatsPerMeasure * opts.bars;
   return minutes * 60 * 1e3;
 }

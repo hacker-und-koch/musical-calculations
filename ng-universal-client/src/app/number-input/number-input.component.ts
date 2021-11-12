@@ -17,18 +17,15 @@ export class NumberInputComponent implements OnInit {
   private inputElement!: HTMLInputElement;
 
   onInputChanged() {
-    console.log('Number input changed');
     const value = this.inputElement.value;
     this.valueChange.emit(value);
   }
 
   ngOnInit(): void {
-    console.log('hi!', this.label, this.value);
     this.inputElement = this.ref.nativeElement.getElementsByTagName('input')[0];
   }
 
   handleClick() {
-    console.log('handling click!');
     this.inputElement.select();
   }
 }

@@ -1,2 +1,23 @@
-<h2>Step To Time</h2>
-<p>step-to-time works!</p>
+  <div class="container col p-100 m-8">
+    <h2 class="w-100">Step To Time</h2>
+    <app-number-input 
+        class="w-100 m-8"
+        (changed)="calcResult()" 
+        [(value)]="values.stepUpper"
+        [label]="''" 
+    ></app-number-input>
+    <app-number-input 
+        class="w-100 m-8"
+        (changed)="calcResult()" 
+        [(value)]="values.stepLower"
+        [label]="'th at'"
+    ></app-number-input>
+    <app-number-input 
+        class="w-100 m-8"
+        (changed)="calcResult()" 
+        [(value)]="values.bpm"
+        [label]="'bpm'"
+    ></app-number-input>
+        
+    <h3 class="w-100 m-8">Result: {{ (result | async )?.timeStr }}</h3>
+</div>
