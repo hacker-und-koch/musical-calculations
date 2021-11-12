@@ -15,7 +15,8 @@ export class StepToTimeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  public collapsed = false;
+  
   private _title!: string;
   get title() {
     return this._title;
@@ -44,5 +45,15 @@ export class StepToTimeComponent implements OnInit {
     // const date = new Date(time);
     const timeStr = `${time.toFixed(2)} ms`;
     this._result.next({ time, timeStr });
+  }
+
+  public scaleInput(multiplier: number) {
+    if (multiplier > 1 && Number(this.values.stepUpper) > 1) {
+      this.values.stepUpper = String(Number(this.values.stepUpper) / multiplier)
+    } else if (multiplier > 1 || Number(this.values.stepLower) > 1.0) {
+      this.values.stepLower = String(Number(this.values.stepLower) * multiplier);
+    } else {
+      this.values.stepUpper = String(Number(this.values.stepUpper) / multiplier);
+    }
   }
 }

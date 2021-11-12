@@ -1,23 +1,29 @@
-  <div class="container col p-100 m-8">
-    <h2 class="w-100">Step To Time</h2>
-    <app-number-input 
-        class="w-100 m-8"
-        (changed)="calcResult()" 
-        [(value)]="values.stepUpper"
-        [label]="''" 
-    ></app-number-input>
-    <app-number-input 
-        class="w-100 m-8"
-        (changed)="calcResult()" 
-        [(value)]="values.stepLower"
-        [label]="'th at'"
-    ></app-number-input>
-    <app-number-input 
-        class="w-100 m-8"
-        (changed)="calcResult()" 
-        [(value)]="values.bpm"
-        [label]="'bpm'"
-    ></app-number-input>
-        
-    <h3 class="w-100 m-8">Result: {{ (result | async )?.timeStr }}</h3>
+  <div class="container col w-100 m-8">
+    <h2 (click)="collapsed = !collapsed" class="w-100 pointer">Step To Time ⬍</h2>
+    <div *ngIf="!collapsed">
+        <app-number-input 
+            class="w-100 m-8"
+            (changed)="calcResult()" 
+            [(value)]="values.stepUpper"
+            [label]="''" 
+        ></app-number-input>
+        <app-number-input 
+            class="w-100 m-8"
+            (changed)="calcResult()" 
+            [(value)]="values.stepLower"
+            [label]="'th at'"
+        ></app-number-input>
+        <app-number-input 
+            class="w-100 m-8"
+            (changed)="calcResult()" 
+            [(value)]="values.bpm"
+            [label]="'bpm'"
+        ></app-number-input>
+            
+        <h3 class="w-100 m-8">Result: {{ (result | async )?.timeStr }}</h3>
+        <span class="w-100 m8 row">
+            <button (click)="scaleInput(0.5)" >/2</button>
+            <button (click)="scaleInput(2.0)" >x2</button>
+        </span>
+    </div>
 </div>

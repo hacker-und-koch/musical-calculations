@@ -21,6 +21,7 @@ export class BarsToTimeComponent implements OnInit {
     bars: "16",
     bpm: "120",
   }
+  public collapsed = false;
 
   public signature: string = "4"; // 4/4; use '3' for 3/4
 
