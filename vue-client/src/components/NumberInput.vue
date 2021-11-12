@@ -28,7 +28,7 @@ export default class NumberInput extends Vue {
   }
 
   public signalChange(origEvent: Event) {
-    this.$emit('change', origEvent);
+    // this.$emit('change', origEvent);
   }
 }
 </script>

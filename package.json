@@ -12,5 +12,12 @@
   },
   "scripts": {
     "deploy": "./upload-dist.sh"
+  },
+  "dependencies": {
+    "vue-property-decorator": "^9.1.2"
+  },
+  "devDependencies": {
+    "@angular/cli": "^13.0.2",
+    "ng": "^0.0.0"
   }
 }

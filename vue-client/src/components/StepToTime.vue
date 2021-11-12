@@ -1,9 +1,9 @@
 <template>
   <div class="m2t">
     <h2>{{ title }}</h2>
-    <NumberInput @change="calcResult" :val="stepUpper" />
+    <!-- <NumberInput @change="calcResult" :val="stepUpper" />
     <NumberInput @change="calcResult" :val="stepLower" />
-    <NumberInput @change="calcResult" :val="bpm" />
+    <NumberInput @change="calcResult" :val="bpm" /> -->
     <h3>Result: {{ result.timeStr }}</h3>
   </div>
 </template>
@@ -16,14 +16,14 @@ import {
   Emit,
 } from 'vue-property-decorator';
 import InputValue from '../models/input-value';
-import NumberInput from './NumberInput.vue';
+// import NumberInput from './NumberInput.vue';
 import {
   stepToTime,
 } from '../util';
 
 @Component({
   components: {
-    NumberInput,
+    // NumberInput,
   },
 })
 export default class StepToTime extends Vue {

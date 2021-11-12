@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <MusicalCalculations :title="title"/>
+  <!-- <div id="app"> -->
+    <img alt="Vue logo" src="./assets/logo.png">
+    <!-- <MusicalCalculations :title="title"/> -->
+    <HelloWorld />
     <a class="footer" target="_blank" href="https://github.com/hacker-und-koch/musical-calculations">github</a>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import MusicalCalculations from './components/MusicalCalculations.vue';
-import NumberInput from './components/NumberInput.vue';
+// import MusicalCalculations from './components/MusicalCalculations.vue';
+// import NumberInput from './components/NumberInput.vue';
+import HelloWorld from './components/HelloWorld.vue';
 
 @Component({
   components: {
-    MusicalCalculations,
-    NumberInput,
+    // MusicalCalculations,
+    HelloWorld,
+    // NumberInput,
   },
 })
 export default class App extends Vue {
-  private title = 'Musical Calculations';
+  // private title = 'Musical Calculations';
 }
 </script>
 
-<style lang="less">
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
