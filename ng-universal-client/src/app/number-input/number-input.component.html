@@ -1,0 +1,10 @@
+<div class="card">
+    <input 
+        type="number" 
+        (change)="onInputChanged()" 
+        [value]="value"
+        (click)="handleClick($event)"
+        (keyup)="onInputChanged()"
+    />
+    <span>{{label}}</span>
+</div>

@@ -1,0 +1,18 @@
+<h2>Bars To Time</h2>
+
+<app-number-input 
+    (changed)="calcResult()" 
+    [label]="'bars at'" 
+    [(value)]="values.bars"
+></app-number-input>
+<app-number-input 
+    (changed)="calcResult()" 
+    [label]="'bpm with'" 
+    [(value)]="values.bpm"
+></app-number-input>
+
+<span class="card">( 4/4 signature )</span>
+
+<h3 class="card">Result: {{ (result | async )?.timeStr }}</h3>
+
+<!-- -- {{ values.bars }} -- {{ values.bpm }} -- -->
