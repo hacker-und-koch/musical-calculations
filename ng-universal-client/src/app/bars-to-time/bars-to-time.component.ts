@@ -7,7 +7,7 @@ import { padTime as pad, measuresToTime } from '../util';
 @Component({
   selector: 'app-bars-to-time',
   templateUrl: './bars-to-time.component.html',
-  styleUrls: ['./bars-to-time.component.scss']
+  styleUrls: ['./bars-to-time.component.scss', '../app.component.scss']
 })
 export class BarsToTimeComponent implements OnInit {
 

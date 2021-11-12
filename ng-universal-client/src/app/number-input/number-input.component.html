@@ -1,10 +1,10 @@
-<div class="card">
+<div class="container" (click)="handleClick()">
     <input 
+        class="w-50"
         type="number" 
         (change)="onInputChanged()" 
         [value]="value"
-        (click)="handleClick($event)"
         (keyup)="onInputChanged()"
     />
-    <span>{{label}}</span>
+        <span class="w-50">{{label}}</span>
 </div>

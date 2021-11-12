@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@ang
 @Component({
   selector: 'app-number-input',
   templateUrl: './number-input.component.html',
-  styleUrls: ['./number-input.component.scss']
+  styleUrls: ['./number-input.component.scss', '../app.component.scss']
 })
 export class NumberInputComponent implements OnInit {
 
@@ -14,23 +14,21 @@ export class NumberInputComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
   @Output() changed = new EventEmitter();
 
+  private inputElement!: HTMLInputElement;
+
   onInputChanged() {
     console.log('Number input changed');
-    const value = this.ref.nativeElement.getElementsByTagName('input')[0].value;
+    const value = this.inputElement.value;
     this.valueChange.emit(value);
   }
 
   ngOnInit(): void {
     console.log('hi!', this.label, this.value);
+    this.inputElement = this.ref.nativeElement.getElementsByTagName('input')[0];
   }
 
-  handleClick(event: Event) {
+  handleClick() {
     console.log('handling click!');
-    if (event.target) {
-      if (event.target instanceof HTMLInputElement) {
-        event.target.select();
-      }
-    }
+    this.inputElement.select();
   }
-
 }
