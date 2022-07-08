@@ -269,6 +269,9 @@
                         <div class="button w-50 text-right pad-8" onclick="step2TimeMultiplier(0.5, event)">:2</div>
                         <div class="button w-50 text-left pad-8" onclick="step2TimeMultiplier(2, event)">x2</div>
                     </div>
+                    <div>
+                        <span class="button" onclick="resetStep2Time()">reset</span>
+                    </div>
                     <button class="hidden" type="submit">just for JS stuff</button>
                 </form>
             </div>
@@ -328,16 +331,32 @@
         const step2TimeResult = document.getElementById('step-2-time-result')
         const styleRoot = document.documentElement;
 
-        let theme = 'light';
+        const defaultSettings = {
+            theme: 'light',
+            bpm: 120,
+            stepNumerator: 1,
+            stepNominator: 4,
+        }
+        const settings = getSettings();
+
+        let theme = 'light' || document.cookie;
 
         const isInteger = Number.isInteger;
         function calcStep2Time() {
             console.log('calculating step');
 
+            const bpm = step2TimeForm.bpm.value;
+            const numerator = Number(step2TimeForm.stepUpper.value);
+            const nominator = Number(step2TimeForm.stepLower.value);
             step2TimeResult.innerText = stepToTime({
-                bpm: step2TimeForm.bpm.value,
-                step: Number(step2TimeForm.stepUpper.value) / Number(step2TimeForm.stepLower.value),
+                bpm,
+                step: numerator / nominator,
             }).toFixed(2);
+
+            settings.bpm = bpm;
+            settings.stepNominator = nominator;
+            settings.stepNumerator = numerator;
+            saveSettings();
         }
 
         function step2TimeMultiplier(multiplier, event) {
@@ -371,7 +390,6 @@
                 if (child.tagName !== 'INPUT' && child.type !== 'number') continue;
 
                 collector.push(child);
-                console.log(form.knownInputs);
                 child.addEventListener('keyup', () => {
                     calcStep2Time();
                 });
@@ -386,7 +404,6 @@
         }
 
         function handleFormSubmit(form) {
-            console.log(form.knownInputs, 'here?!');
             for (let input of form.knownInputs) {
                 input.blur();
             }
@@ -398,17 +415,17 @@
 
         function getCssVariable(name, value) {
             const query = '--' + name;
-            console.log('asking', query);
             return getComputedStyle(styleRoot).getPropertyValue(query);
         }
         function setCssVariable(name, value) {
-            console.log(styleRoot.style);
             document.documentElement.style.setProperty('--' + name, value);
         }
 
         function toggleTheme() {
             theme = (theme === 'light') ? 'dark' : 'light';
             applyTheme();
+            settings.theme = theme;
+            saveSettings();
         }
 
         function applyTheme() {
@@ -420,12 +437,49 @@
                 'footer-background',
                 'footer-color'
             ];
-            console.log(styleRoot);
             for (let v of vars) {
                 const themeColor = getCssVariable(theme + '-' + v);
-                console.log(v, themeColor);
                 setCssVariable(v, themeColor);
             }
+        }
+
+        function getSettings() {
+
+            let settings = {};
+            try {
+                settings = JSON.parse(document.cookie || '{}');
+            } catch (e) {
+                console.log('failed to load settings from cookie', e);
+            }
+            return {
+                ...defaultSettings,
+                ...settings,
+            }
+        }
+
+        function loadSettings() {
+            const settings = getSettings();
+            theme = settings.theme;
+            step2TimeForm.bpm.value = settings.bpm;
+            step2TimeForm.stepUpper.value = settings.stepNumerator;
+            step2TimeForm.stepLower.value = settings.stepNominator;
+        }
+
+        function saveSettings() {
+            try {
+                document.cookie = JSON.stringify(settings);
+    
+                console.log('Did save settings:', getSettings());
+            } catch(e) {
+                console.log('could not store settings:', e);
+            }
+        }
+
+        function resetStep2Time() {
+            step2TimeForm.bpm.value = defaultSettings.bpm;
+            step2TimeForm.stepUpper.value = defaultSettings.stepNumerator;
+            step2TimeForm.stepLower.value = defaultSettings.stepNominator;
+            calcStep2Time();
         }
 
     </script>
@@ -433,11 +487,13 @@
     <script>
         prepareForm(step2TimeForm);
 
+        setVersion('v1.1.10');
+
+        loadSettings();
         calcStep2Time();
 
-        setVersion('v1.1.9');
-
         applyTheme();
+
     </script>
 
 </body>
