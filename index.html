@@ -33,17 +33,12 @@
 
 
         input {
+            width: auto;
             border: 0;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-        }
-
-        input:focus-within {
-            border: 0;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
+            max-width: 100%;
         }
 
         .calculation .button {
@@ -75,7 +70,7 @@
 
         .calculation {
             width: 100%;
-            min-width: 300px;
+            /* min-width: 300px; */
             align-self: center;
         }
 
@@ -120,12 +115,12 @@
             max-height: 100%;
         }
 
-        .max-250 {
-            max-width: 250px;
+        .max-200 {
+            /* max-width: 200px; */
         }
 
         .max-100 {
-            max-width: 250px;
+            /* max-width: 250px; */
         }
 
         .text-left {
@@ -174,7 +169,7 @@
 
 
     <div id="container" class="w-100 max-600">
-        <div class="calculation col max-250">
+        <div class="calculation col max-200">
             <h3 class="text-center">Step To Time</h3>
             <div id="step-2-time col">
                 <form action="javascript:handleFormSubmit(step2TimeForm)" id="step-2-time-form" class="w-100 debug-green col">
