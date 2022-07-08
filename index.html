@@ -33,12 +33,12 @@
 
 
         input {
-            width: auto;
             border: 0;
+            /* width: auto; */
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            max-width: 100%;
+            /* max-width: 100%; */
         }
 
         .calculation .button {
@@ -66,11 +66,12 @@
             padding: 2px;
             margin: 2px;
             align-items: center;
+            max-width: 100vh;
         }
 
         .calculation {
-            width: 100%;
-            /* min-width: 300px; */
+            width: auto;
+            max-width: 100%;
             align-self: center;
         }
 
@@ -87,8 +88,21 @@
             flex-direction: column;
             justify-content: center;
             align-content: center;
-            justify-content: center;
             align-items: center;
+        }
+        .col-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-content: left;
+            align-items: left;
+        }
+        .col-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: right;
+            align-content: right;
+            align-items: right;
         }
 
         .row {
@@ -119,14 +133,6 @@
             max-height: 100%;
         }
 
-        .max-200 {
-            /* max-width: 200px; */
-        }
-
-        .max-100 {
-            /* max-width: 250px; */
-        }
-
         .text-left {
             text-align: left;
         }
@@ -142,10 +148,14 @@
         .pad-8 {
             padding: 8px;
         }
+
         .pad-b-16 {
             padding-bottom: 16px;
         }
 
+        .mgn-8 {
+            margin: 8px;
+        }
         /* .debug-green {
             background-color: greenyellow;
             box-shadow: 0 0 0 2px green inset;
@@ -176,7 +186,8 @@
         <div class="calculation col max-200">
             <h3 class="text-center">Step To Time</h3>
             <div id="step-2-time col">
-                <form action="javascript:handleFormSubmit(step2TimeForm)" id="step-2-time-form" class="w-100 debug-green col">
+                <form action="javascript:handleFormSubmit(step2TimeForm)" id="step-2-time-form"
+                    class="w-100 debug-green col">
                     <div class="row w-100 debug-blue">
                         <span class="w-50 text-right pad-8 light-right-border">
                             BPM
@@ -185,16 +196,23 @@
                             STEP
                         </span>
                     </div>
-                    <div class="debug-blue row w-100">
-                        <div class="debug-yellow w-50">
-                            <input type="number" name="bpm" id="bpm" placeholder="BPM" value="120"
-                                class="text-right w-100 h-100" />
+                    <div class="col debug-blue row w-100">
+                        <div class="debug-yellow col-right w-50 h-100">
+                            <div class="col-right w-100 h-100" style="align-content: right;">
+                                <input type="number" name="bpm" id="bpm" placeholder="BPM" value="120"
+                                    class="text-right w-100" />
+                            </div>
                         </div>
-                        <div class="debug-magenta col w-50">
-                            <input type="number" name="stepUpper" id="step-upper" placeholder="1" value="1"
-                                class="pad-8 w-100 h-100 light-bottom-border" />
-                            <input type="number" name="stepLower" id="step-lower" placeholder="4" value="4"
-                                class="pad-8 w-100 h-100" />
+                        <div class="debug-magenta col-left w-50">
+                            <div class="col w-50 h-100 light-bottom-border ">
+                                <input type="number" name="stepUpper" id="step-upper" placeholder="1" value="1"
+                                     class="pad-8 w-100"/>
+                            </div>
+                            <div class="col w-50 h-100">
+                                <input type="number" name="stepLower" id="step-lower" placeholder="4" value="4"
+                                     class="pad-8 w-100"/>
+
+                            </div>
                         </div>
                     </div>
                     <div class="calc-result w-100 text-center pad-8">
@@ -212,7 +230,8 @@
     </div>
     <footer>
         This is mainly a playground for testing web stuff. <a
-            href="https://github.com/hacker-und-koch/musical-calculations">Repo</a> is a mess ¯\_ (ツ)_/¯ <span class="version">v1.0</span>
+            href="https://github.com/hacker-und-koch/musical-calculations">Repo</a> is a mess ¯\_ (ツ)_/¯ <span
+            id="version" class="version">v1.0</span>
     </footer>
 
 
@@ -302,7 +321,7 @@
             for (let child of form.children) {
                 if (child.children.length > 0) prepareForm(child, outerCollector);
                 if (child.tagName !== 'INPUT' && child.type !== 'number') continue;
-                
+
                 collector.push(child);
                 console.log(form.knownInputs);
                 child.addEventListener('keyup', () => {
@@ -325,12 +344,18 @@
             }
         }
 
+        function setVersion(version) {
+            document.getElementById('version').innerText = version;
+        }
+
     </script>
 
     <script>
         prepareForm(step2TimeForm);
 
         calcStep2Time();
+
+        setVersion('1.1');
     </script>
 
 </body>
