@@ -37,11 +37,10 @@
 
         input {
             border: 0;
-            /* width: auto; */
+            color: blue;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            /* max-width: 100%; */
         }
 
         .calculation .button {
@@ -50,6 +49,7 @@
             font-weight: bold;
             font-size: 0.9rem;
             cursor: pointer;
+            color: blue;
         }
 
         .info-text {
@@ -195,8 +195,8 @@
                             STEP
                         </span>
                     </div>
-                    <div class="col debug-blue row w-100 h-100">
-                        <div class="debug-magenta col-right w-50 h-100">
+                    <div class="col debug-blue row w-100 h-100 pad-8">
+                        <div class="debug-magenta col-right w-50 h-100 pad-8">
                             <div  class="w-50 h-100" >
                                 <input type="number" name="bpm" id="bpm" placeholder="BPM" value="120"
                                     class="text-right w-100" />
@@ -205,11 +205,11 @@
                         <div class="debug-magenta col-left w-50">
                             <div class="col w-50 h-100 light-bottom-border">
                                 <input type="number" name="stepUpper" id="step-upper" placeholder="numerator" value="1"
-                                     class="pad-8 w-100 h-100"/>
+                                     class="w-100 h-100"/>
                             </div>
                             <div class="col w-50 h-100">
                                 <input type="number" name="stepLower" id="step-lower" placeholder="denominator" value="4"
-                                     class="pad-8 w-100"/>
+                                     class="w-100"/>
 
                             </div>
                         </div>
@@ -354,7 +354,7 @@
 
         calcStep2Time();
 
-        setVersion('v1.1.4');
+        setVersion('v1.1.5');
     </script>
 
 </body>
