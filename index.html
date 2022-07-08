@@ -19,8 +19,9 @@
 
         footer {
             position: absolute;
+            width: auto;
+            max-width: 100vw;
             bottom: 0;
-            width: 100vw;
             text-align: center;
             background-color: #eee;
             color: #aaaa;
@@ -45,7 +46,7 @@
             cursor: pointer;
         }
 
-        .calculation button {
+        .calculation .button {
             background-color: white;
             border: 0;
             font-weight: bold;
@@ -176,7 +177,7 @@
         <div class="calculation col max-250">
             <h3 class="text-center">Step To Time</h3>
             <div id="step-2-time col">
-                <form action="javascript:void(0)" id="step-2-time-form" class="w-100 debug-green col">
+                <form action="javascript:handleFormSubmit(step2TimeForm)" id="step-2-time-form" class="w-100 debug-green col">
                     <div class="row w-100 debug-blue">
                         <span class="w-50 text-right pad-8 light-right-border">
                             BPM
@@ -185,7 +186,7 @@
                             STEP
                         </span>
                     </div>
-                    <div class="debug-blue row w-100 pad-8">
+                    <div class="debug-blue row w-100">
                         <div class="debug-yellow w-50">
                             <input type="number" name="bpm" id="bpm" placeholder="BPM" value="120"
                                 class="text-right w-100 h-100" />
@@ -202,9 +203,10 @@
                     </div>
                     <div class="w-100 debug-magenta row">
                         <span class="info-text">multiply by:</span>
-                        <button class="w-50 text-right" onclick="step2TimeMultiplier(0.5)">:2</button>
-                        <button class="w-50 text-left" onclick="step2TimeMultiplier(2)">x2</button>
+                        <div class="button w-50 text-right pad-8" onclick="step2TimeMultiplier(0.5, event)">:2</div>
+                        <div class="button w-50 text-left pad-8" onclick="step2TimeMultiplier(2, event)">x2</div>
                     </div>
+                    <button style="visibility: hidden;" type="submit">just for JS stuff</button>
                 </form>
             </div>
         </div>
@@ -264,7 +266,7 @@
         const isInteger = Number.isInteger;
 
         function calcStep2Time() {
-            console.log(step2TimeForm);
+            console.log('calculating step');
 
             step2TimeResult.innerText = stepToTime({
                 bpm: step2TimeForm.bpm.value,
@@ -272,7 +274,8 @@
             }).toFixed(2);
         }
 
-        function step2TimeMultiplier(multiplier) {
+        function step2TimeMultiplier(multiplier, event) {
+
             const upper = step2TimeForm.stepUpper.value;
             const lower = step2TimeForm.stepLower.value;
 
@@ -295,17 +298,31 @@
             calcStep2Time();
         }
 
-        function prepareForm(form) {
+        function prepareForm(form, outerCollector = []) {
+            const collector = outerCollector;
             for (let child of form.children) {
-                if (child.children.length > 0) prepareForm(child);
+                if (child.children.length > 0) prepareForm(child, outerCollector);
                 if (child.tagName !== 'INPUT' && child.type !== 'number') continue;
-
+                
+                collector.push(child);
+                console.log(form.knownInputs);
                 child.addEventListener('keyup', () => {
+                    calcStep2Time();
+                });
+                child.addEventListener('change', () => {
                     calcStep2Time();
                 });
                 child.addEventListener('click', () => {
                     child.select();
                 });
+            }
+            form.knownInputs = [...collector];
+        }
+
+        function handleFormSubmit(form) {
+            console.log(form.knownInputs, 'here?!');
+            for (let input of form.knownInputs) {
+                input.blur();
             }
         }
 
