@@ -7,12 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusiCalc</title>
     <style>
+        :root {
+            --color: #1e90ff;
+            --background: #ffffff;
+            --link-color: blue;
+            --info-color: darkgray;
+
+            --footer-background: #eee;
+            --footer-color: #aaaa;
+
+            --light-color: black;
+            --light-background: #ffffff;
+            --light-link-color: rgb(99, 99, 255);
+            --light-info-color: darkgray;
+            --light-footer-background: #eee;
+            --light-footer-color: #aaaa;
+
+            --dark-color: white;
+            --dark-background: black;
+            --dark-link-color: rgb(16, 195, 255);
+            --dark-info-color: darkgray;
+            --dark-footer-background: #202020;
+            --dark-footer-color: #aaaa;
+        }
+
         body {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            color: var(--color);
+            background-color: var(--background);
+            /* justify-content: center; */
             padding: 5px;
             margin: 5px;
             overflow-x: hidden;
@@ -29,8 +55,8 @@
             width: 100vw;
             bottom: 0;
             text-align: center;
-            background-color: #eee;
-            color: #aaaa;
+            background-color: var(--footer-background);
+            color: var(--footer-color);
             font-size: 0.75rem;
             padding: 8px;
         }
@@ -42,8 +68,9 @@
 
         input {
             border: 0;
-            color: blue;
             font-size: 1rem;
+            color: var(--link-color);
+            background-color: var(--background);
             font-weight: bold;
             cursor: pointer;
         }
@@ -54,7 +81,8 @@
             font-weight: bold;
             font-size: 0.9rem;
             cursor: pointer;
-            color: blue;
+            color: var(--link-color);
+            background-color: var(--background);
         }
 
         .info-text {
@@ -98,12 +126,14 @@
             align-content: center;
             align-items: center;
         }
+
         .col-left {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             margin-left: 8px;
         }
+
         .col-right {
             display: flex;
             flex-direction: column;
@@ -162,6 +192,16 @@
         .mgn-8 {
             margin: 8px;
         }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+
+
         /* .debug-green {
             background-color: greenyellow;
             box-shadow: 0 0 0 2px green inset;
@@ -185,7 +225,7 @@
 </head>
 
 <body>
-    <h1>MusiCalc.</h1>
+    <h1 class="pointer" onclick="toggleTheme()">MusiCalc.</h1>
 
 
     <div id="container" class="w-100 max-600">
@@ -204,7 +244,7 @@
                     </div>
                     <div class="col debug-blue row w-100 h-100 pad-8">
                         <div class="debug-magenta col-right w-50 h-100 pad-8">
-                            <div  class="w-50 h-100" >
+                            <div class="w-50 h-100">
                                 <input type="number" name="bpm" id="bpm" placeholder="BPM" value="120"
                                     class="text-right w-100" />
                             </div>
@@ -212,11 +252,11 @@
                         <div class="debug-magenta col-left w-50 pad-8">
                             <div class="col w-50 h-100 light-bottom-border">
                                 <input type="number" name="stepUpper" id="step-upper" placeholder="numerator" value="1"
-                                     class="w-100 h-100"/>
+                                    class="w-100 h-100" />
                             </div>
                             <div class="col w-50 h-100">
-                                <input type="number" name="stepLower" id="step-lower" placeholder="denominator" value="4"
-                                     class="w-100"/>
+                                <input type="number" name="stepLower" id="step-lower" placeholder="denominator"
+                                    value="4" class="w-100" />
 
                             </div>
                         </div>
@@ -229,7 +269,7 @@
                         <div class="button w-50 text-right pad-8" onclick="step2TimeMultiplier(0.5, event)">:2</div>
                         <div class="button w-50 text-left pad-8" onclick="step2TimeMultiplier(2, event)">x2</div>
                     </div>
-                    <button style="visibility: hidden;" type="submit">just for JS stuff</button>
+                    <button class="hidden" type="submit">just for JS stuff</button>
                 </form>
             </div>
         </div>
@@ -286,9 +326,11 @@
         const container = document.getElementById('container');
         const step2TimeForm = document.getElementById('step-2-time-form');
         const step2TimeResult = document.getElementById('step-2-time-result')
+        const styleRoot = document.documentElement;
+
+        let theme = 'light';
 
         const isInteger = Number.isInteger;
-
         function calcStep2Time() {
             console.log('calculating step');
 
@@ -354,6 +396,38 @@
             document.getElementById('version').innerText = version;
         }
 
+        function getCssVariable(name, value) {
+            const query = '--' + name;
+            console.log('asking', query);
+            return getComputedStyle(styleRoot).getPropertyValue(query);
+        }
+        function setCssVariable(name, value) {
+            console.log(styleRoot.style);
+            document.documentElement.style.setProperty('--' + name, value);
+        }
+
+        function toggleTheme() {
+            theme = (theme === 'light') ? 'dark' : 'light';
+            applyTheme();
+        }
+
+        function applyTheme() {
+            const vars = [
+                'color',
+                'background',
+                'link-color',
+                'info-color',
+                'footer-background',
+                'footer-color'
+            ];
+            console.log(styleRoot);
+            for (let v of vars) {
+                const themeColor = getCssVariable(theme + '-' + v);
+                console.log(v, themeColor);
+                setCssVariable(v, themeColor);
+            }
+        }
+
     </script>
 
     <script>
@@ -361,7 +435,9 @@
 
         calcStep2Time();
 
-        setVersion('v1.1.7');
+        setVersion('v1.1.8');
+
+        applyTheme();
     </script>
 
 </body>
