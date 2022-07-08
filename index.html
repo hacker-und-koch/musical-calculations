@@ -1,12 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello!</title>
+    <title>MusiCalc</title>
+    <style>
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100vw;
+            text-align: center;
+            background-color: #eee;
+            color: #aaaa;
+        }
+
+        footer a {
+            color: lightblue;
+        }
+
+        /* div {
+            display: flex;
+            align-content: center;
+        } */
+
+        input {
+            border: 0;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+
+        .light-bottom-border {
+            border-bottom: 1px solid lightgray;
+        }
+
+        .light-right-border {
+            border-right: 1px solid lightgray;
+        }
+
+        .container {
+            padding: 2px;
+            margin: 2px;
+            align-items: center;
+        }
+
+        .calculation {
+            width: 100%;
+            min-width: 300px;
+            align-self: center;
+        }
+        
+        .calc-result-value {
+            font-weight: bold;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            /* align-items: center; */
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+        .w-50 {
+            width: 50%;
+        }
+        .w-25 {
+            width: 25%;
+        }
+
+        .h-100 {
+            height: 100%;
+        }
+
+        .max-250 {
+            max-width: 250px;
+        }
+        .max-100 {
+            max-width: 250px;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-center {
+            text-align: center;
+        }
+
+        .pad-8 {
+            padding: 8px;
+        }
+/* 
+        .debug-green {
+            background-color: greenyellow;
+            box-shadow: 0 0 0 2px green inset;
+        }
+
+        .debug-magenta {
+            background-color: magenta;
+            box-shadow: 0 0 0 2px darkorchid inset;
+        }
+
+        .debug-blue {
+            background-color: cyan;
+            box-shadow: 0 0 0 2px blue inset;
+        }
+        .debug-yellow {
+            background-color: yellow;
+            box-shadow: 0 0 0 2px darkgoldenrod inset;
+        } */
+    </style>
 </head>
+
 <body>
-    <h1>Well, glad that works.</h1>
+    <h1>MusiCalc.</h1>
+
+
+    <div id="container" class="w-100 max-600">
+        <div class="calculation col">
+            <h3 class="text-center">Step To Time</h3>
+            <div id="step-2-time col">
+                <form action="javascript:void(0)" id="step-2-time-form" class="w-100 debug-green col">
+                    <div class="row w-100 debug-blue">
+                        <span class="w-50 text-right pad-8 light-right-border">
+                            BPM                            
+                        </span>
+                        <span class="w-50 pad-8">
+                            STEP
+                        </span>
+                    </div>
+                    <div class="debug-blue row w-100 pad-8">
+                        <div class="debug-yellow w-50">
+                            <input type="number" name="bpm" id="bpm" placeholder="BPM" value="120" class="text-right w-100 h-100" />
+                        </div>
+                        <div class="debug-magenta col w-50">
+                            <input type="number" name="stepUpper" id="step-upper" placeholder="1" value="1" class="pad-8 w-100 h-100 light-bottom-border"/>
+                            <input type="number" name="stepLower" id="step-lower" placeholder="4" value="4" class="pad-8 w-100 h-100"/>
+                        </div>
+                    </div>
+                    <div class="calc-result w-100 text-center">
+                        Results in: <span class="calc-result-value" id="step-2-time-result"></span>ms
+                    </div>
+                    <div class="w-100 debug-magenta row">
+                        <button class="w-50 max-100" onclick="step2TimeMultiplier(0.5)">:2</button>
+                        <button class="w-50 max-100" onclick="step2TimeMultiplier(2)">x2</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        This is mainly a playground for testing web stuff. <a
+            href="https://github.com/hacker-und-koch/musical-calculations">Repo</a> is a mess ¯\_ (ツ)_/¯
+    </footer>
+
+
+    <script>
+        // export interface MeasuresToTimeOpts {
+        //     measures: number;
+        //     bpm: number;
+        //     beatsPerMeasure: number;
+        // }
+
+        /**
+         *
+         * 1 MINUTE    4 BEATS     120 MEASURES
+         * ––––––––– x ––––––––– x –––––––––––– = 4 MINUTES
+         * 120 BEATS   1 MEASURE   1
+         */
+        function measuresToTime(opts) {
+            const minutes = (1 / opts.bpm) * opts.beatsPerMeasure * opts.measures;
+            return minutes * 60 * 1e3;
+        }
+
+        // export interface StepToTimeOpts {
+        //     step: number;
+        //     bpm: number;
+        // }
+        /**
+         *
+         * 1 MEASURES   1 MINUTE    60 SECONDS   1000 MS    4 BEATS
+         * –––––––––– x ––––––––– x –––––––––– x –––––––– x –––––––––– = 500MS
+         * 4            120 BEATS   1 MINUTE     1 SECOND   1 MEASURES
+         *
+         * 1 MEASURES   1 MINUTE    60 SECONDS   1000 MS    4 BEATS
+         * –––––––––– x ––––––––– x –––––––––– x –––––––– x –––––––––– = 250MS
+         * 8            120 BEATS   1 MINUTE     1 SECOND   1 MEASURES
+         *
+         */
+        function stepToTime(opts) {
+            return opts.step * (1 / opts.bpm) * 60 * 1e3 * 4;
+        }
+
+
+
+    </script>
+
+    <script>
+        const container = document.getElementById('container');
+        const step2TimeForm = document.getElementById('step-2-time-form');
+        const step2TimeResult = document.getElementById('step-2-time-result')
+
+        const isInteger = Number.isInteger;
+
+        function calcStep2Time() {
+            console.log(step2TimeForm);
+
+            step2TimeResult.innerText = stepToTime({
+                bpm: step2TimeForm.bpm.value,
+                step: Number(step2TimeForm.stepUpper.value) / Number(step2TimeForm.stepLower.value),
+            }).toFixed(2);
+        }
+
+        function step2TimeMultiplier(multiplier) {
+            const upper = step2TimeForm.stepUpper.value;
+            const lower = step2TimeForm.stepLower.value;
+
+            let resultingUpper = Number(upper * multiplier);
+            let resultingLower = Number(lower);
+
+            if (!isInteger(resultingUpper) || !isInteger(resultingLower)) {
+                resultingUpper *= 2;
+                resultingLower *= 2;
+            }
+
+            if (isInteger(resultingLower / resultingUpper)) {
+                resultingLower = resultingLower / resultingUpper;
+                resultingUpper = 1;
+            }
+
+            step2TimeForm.stepUpper.value = resultingUpper;
+            step2TimeForm.stepLower.value = resultingLower;
+
+            calcStep2Time();
+        }
+
+        function prepareForm(form) {
+            for (let child of form.children) {
+                if (child.children.length > 0) prepareForm(child);
+                if (child.tagName !== 'INPUT' && child.type !== 'number') continue;
+
+                child.addEventListener('keyup', () => {
+                    calcStep2Time();
+                });
+                child.addEventListener('click', () => {
+                    child.select();
+                });
+            }
+        }
+
+    </script>
+
+    <script>
+        prepareForm(step2TimeForm);
+
+        calcStep2Time();
+    </script>
+
 </body>
+
 </html>
